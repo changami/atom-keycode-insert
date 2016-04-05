@@ -2,8 +2,8 @@
 'context-menu':
   'atom-text-editor': [
     {
-      'label': 'Toggle keycode-insert'
-      'command': 'keycode-insert:toggle'
+      'label': 'Insert keycode-insert'
+      'command': 'keycode-insert:insert'
     }
   ]
 'menu': [
@@ -13,8 +13,8 @@
       'label': 'keycode-insert'
       'submenu': [
         {
-          'label': 'Toggle'
-          'command': 'keycode-insert:toggle'
+          'label': 'Insert'
+          'command': 'keycode-insert:insert'
         }
       ]
     ]

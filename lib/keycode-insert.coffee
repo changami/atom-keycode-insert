@@ -14,7 +14,7 @@ module.exports = KeycodeInsert =
     @subscriptions = new CompositeDisposable
 
     # Register command that toggles this view
-    @subscriptions.add atom.commands.add 'atom-workspace', 'keycode-insert:toggle': => @toggle()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'keycode-insert:insert': => @insert()
 
   deactivate: ->
     @modalPanel.destroy()
@@ -24,10 +24,13 @@ module.exports = KeycodeInsert =
   serialize: ->
     keycodeInsertViewState: @keycodeInsertView.serialize()
 
-  toggle: ->
-    console.log 'KeycodeInsert was toggled!'
+  insert: ->
+    @keycodeInsertView.setCallback(@afterInsert, @)
+    @modalPanel.show()
+    @keycodeInsertView.focus()
 
-    if @modalPanel.isVisible()
-      @modalPanel.hide()
-    else
-      @modalPanel.show()
+  afterInsert: (value, scope) ->
+    scope.modalPanel.hide()
+    atom.workspace.getActivePane().activate()
+    activeEditor = atom.workspace.getActiveTextEditor()
+    activeEditor.insertText(value, select: true)
