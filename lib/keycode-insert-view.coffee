@@ -1,7 +1,6 @@
 module.exports =
 class KeycodeInsertView
   callback: null
-  callbackScope: null
   element: null
   editorElement: null
   editor: null
@@ -33,7 +32,7 @@ class KeycodeInsertView
     @editorElement.onkeyup = (e) ->
       if e.keyCode == self.keydownKeyCode
         self.clear()
-        self.callback?('' + e.keyCode, self.callbackScope)
+        self.callback?('' + e.keyCode)
 
     @element.appendChild(@editorElement)
 
@@ -44,9 +43,8 @@ class KeycodeInsertView
     @editor.setText('')
     @keydownKeyCode = null
 
-  setCallback: (callback, scope) ->
+  setCallback: (callback) ->
     @callback = callback
-    @callbackScope = scope
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->

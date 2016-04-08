@@ -13,7 +13,7 @@ module.exports = KeycodeInsert =
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     @subscriptions = new CompositeDisposable
 
-    # Register command that toggles this view
+    # Register command that runs this function
     @subscriptions.add atom.commands.add 'atom-workspace', 'keycode-insert:insert': => @insert()
 
   deactivate: ->
@@ -25,12 +25,12 @@ module.exports = KeycodeInsert =
     keycodeInsertViewState: @keycodeInsertView.serialize()
 
   insert: ->
-    @keycodeInsertView.setCallback(@afterInsert, @)
+    @keycodeInsertView.setCallback(@afterInsert.bind(@))
     @modalPanel.show()
     @keycodeInsertView.focus()
 
-  afterInsert: (value, scope) ->
-    scope.modalPanel.hide()
+  afterInsert: (value) ->
+    @modalPanel.hide()
     atom.workspace.getActivePane().activate()
     activeEditor = atom.workspace.getActiveTextEditor()
     activeEditor.insertText(value, select: true)
