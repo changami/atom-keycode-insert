@@ -5,7 +5,7 @@ To insert the keycode what you push in Atom.
 
 ## Demo
 
-![DEMO](demo.gif)
+![DEMO](https://raw.githubusercontent.com/changami/atom-keycode-insert/images/demo.gif)
 
 ## Usage
 
